@@ -5,13 +5,12 @@ import speech_recognition as sr
 def get_transcript(recognizer, audio_bytes):
     
     audio_source = sr.AudioData(audio_bytes, sample_rate = 16000, sample_width = 2)
-    text = recognizer.recognize_google(audio_data=audio_source, show_all= False);
-    return text;
+    return recognizer.recognize_google(audio_data=audio_source, show_all= False)
 
 def extract_emotion(transcript): # For testing only, not being used
     words = transcript.split();
     words = [word.strip().lower() for word in words]
-   
+
     for keyword in ["happy", "funny", "welcome", "wonderful", "cool", "smile", "smiling", "thank"]:
         if keyword in words:
             return "happy";
@@ -21,10 +20,10 @@ def extract_emotion(transcript): # For testing only, not being used
     for keyword in ["sad", "cry", "crying"]:
         if keyword in words:
             return "sad";
-    for keyword in ["upset", "angry"]:
-        if keyword in words:
-            return "angry";
-    return "neutral"
+    return next(
+        ("angry" for keyword in ["upset", "angry"] if keyword in words),
+        "neutral",
+    )
 
 if __name__ == "__main__":
     

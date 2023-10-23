@@ -13,8 +13,7 @@ count = 0;
 #NOTE to load audio file in WAV
 def extract_emotion(pickle_model, audio_bytes):
     feature = extract_feature(audio_bytes, mfcc=True, chroma=True, mel=True)
-    emotion_pred = pickle_model.predict([feature])
-    return emotion_pred
+    return pickle_model.predict([feature])
 
 #Extract features function
 def extract_feature(data_bytes, mfcc, chroma, mel):

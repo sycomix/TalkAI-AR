@@ -9,8 +9,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 #takes in wav and returns audio transcribed script
 def transcription(recognizer, audio_bytes):
     audio_source = sr.AudioData(audio_bytes, sample_rate = 16000, sample_width = 2)
-    text = recognizer.recognize_google(audio_data=audio_source, show_all= False);
-    return text;
+    return recognizer.recognize_google(audio_data=audio_source, show_all= False)
 
 #takes in transcribed script and returns detected emotion
 def emotions(script):
